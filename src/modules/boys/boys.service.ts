@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
-import { Boys } from './dto/boys.entity';
+import { Boys } from './boys.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()

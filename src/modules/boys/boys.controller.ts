@@ -14,10 +14,10 @@ import {
 } from '@nestjs/common';
 import { BoysService } from './boys.service';
 import { Request } from 'express';
-import { Boys } from 'src/boys/dto/boys.entity';
+import { Boys } from 'src/modules/boys/boys.entity';
 import { ResultDTO } from 'src/dto/ResultDTO';
 import { JoiValidationPipe } from 'src/pipes/JoiValidationPipe .pipe';
-import { BoySchema } from 'src/schema/BoySchema.schema';
+import { BoySchema } from 'src/modules/boys/BoySchema.schema';
 import { Roles } from 'src/decorators/roles.decorator';
 import { Transaction } from 'typeorm';
 
@@ -31,7 +31,6 @@ export class BoysController {
   // @Roles('admin')
   @Get('list')
   async getList(): Promise<Boys[]> {
-    console.log('getlist-----');
     return await this.boyService.getList();
   }
 
@@ -68,7 +67,6 @@ export class BoysController {
   @Get('except')
   async getException() {
     console.log('get-----exception');
-
     throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
   }
 
