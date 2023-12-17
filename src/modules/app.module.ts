@@ -7,6 +7,8 @@ import { APP_GUARD, Reflector } from '@nestjs/core';
 import { HttpGuard } from '../guards/HttpGuard';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Boys } from './boys/boys.entity';
+import { AuthModule } from './auth/auth.module';
+import { JwtAuthGuard } from 'src/guards/JwtAuthGuard';
 
 @Module({
   imports: [
@@ -16,12 +18,13 @@ import { Boys } from './boys/boys.entity';
       port: 3306,
       username: 'root',
       password: 'zhangxiang1314',
-      database: 'girls',
+      database: 'myblog',
       entities: [Boys],
       autoLoadEntities: true,
       synchronize: true,
     }),
     BoyModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [
@@ -29,6 +32,10 @@ import { Boys } from './boys/boys.entity';
     {
       provide: APP_GUARD,
       useClass: HttpGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
     },
   ],
 })
