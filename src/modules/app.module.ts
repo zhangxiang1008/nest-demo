@@ -7,6 +7,7 @@ import { HttpGuard } from '../guards/HttpGuard';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from 'src/guards/JwtAuthGuard';
+import { BlogModule } from './blog/blog.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { JwtAuthGuard } from 'src/guards/JwtAuthGuard';
       synchronize: true,
     }),
     AuthModule,
+    BlogModule,
   ],
   controllers: [AppController],
   providers: [
