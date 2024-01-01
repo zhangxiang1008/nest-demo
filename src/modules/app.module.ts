@@ -5,12 +5,19 @@ import { LoggerMiddleware } from '../middlewares/LoggerMiddleware';
 import { APP_GUARD, Reflector } from '@nestjs/core';
 import { HttpGuard } from '../guards/HttpGuard';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from 'src/guards/JwtAuthGuard';
 import { BlogModule } from './blog/blog.module';
+import configuration from '../config/index';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      cache: true,
+      load: [configuration],
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
