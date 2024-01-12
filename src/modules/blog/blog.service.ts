@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CreateBlogDto } from './dto/create-blog.dto';
 import { UpdateBlogDto } from './dto/update-blog.dto';
 import { Repository } from 'typeorm';
@@ -7,6 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class BlogService {
+  private readonly logger = new Logger(BlogService.name);
   constructor(
     @InjectRepository(Blog) private blogRepository: Repository<Blog>,
   ) {}
@@ -15,6 +16,7 @@ export class BlogService {
   }
 
   async findAll() {
+    this.logger.log('find all blog------------------11');
     return await this.blogRepository.find();
   }
 

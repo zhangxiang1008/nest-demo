@@ -1,7 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { LoggerMiddleware } from '../middlewares/LoggerMiddleware';
 import { APP_GUARD, Reflector } from '@nestjs/core';
 import { HttpGuard } from '../guards/HttpGuard';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -10,6 +9,8 @@ import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from 'src/guards/JwtAuthGuard';
 import { BlogModule } from './blog/blog.module';
 import configuration from '../config/index';
+import { LoggerModule } from './logger/logger.module';
+import { RedisModule } from './redis/redis.module';
 
 @Module({
   imports: [
@@ -31,6 +32,8 @@ import configuration from '../config/index';
     }),
     AuthModule,
     BlogModule,
+    LoggerModule,
+    RedisModule,
   ],
   controllers: [AppController],
   providers: [
@@ -46,7 +49,5 @@ import configuration from '../config/index';
   ],
 })
 export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes('*');
-  }
+  configure(consumer: MiddlewareConsumer) {}
 }
