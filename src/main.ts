@@ -14,7 +14,10 @@ async function bootstrap() {
   app.useLogger(app.get(MyLogger));
   const redisService = app.get(RedisService);
   redisService.get('k1').then((value) => {
-    console.log('redis----', value);
+    console.log('redis----', JSON.stringify(value));
+  });
+  redisService.zRange('grades', 1).then((value) => {
+    console.log('value', value);
   });
 
   await app.listen(configService.get('app.port') || 3000);
