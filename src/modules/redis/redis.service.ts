@@ -10,7 +10,7 @@ export class RedisService {
   }
 
   async zRange(key: string, num: number) {
-    return await this.redisClient.zRangeWithScores(key, 0, num);
+    return (await this.redisClient.zRangeWithScores(key, 0, num)).reverse();
   }
 
   async zIncrBy(key: string, num: number, member: string) {
