@@ -1,21 +1,20 @@
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Inject, Injectable } from '@nestjs/common';
-import { Cache } from 'cache-manager';
 import { RedisClientType } from 'redis';
 
 @Injectable()
 export class RedisService {
-  //   constructor(@Inject(CACHE_MANAGER) private readonly cacheManager: Cache) {}
   @Inject('REDIS_CLIENT')
   private redisClient: RedisClientType;
   async get<T>(key: string) {
-    // return await this.cacheManager.get(key);
-
     return await this.redisClient.get(key);
   }
 
   async zRange(key: string, num: number) {
-    return await this.redisClient.zRange('grades', 0, num);
+    return await this.redisClient.zRangeWithScores(key, 0, num);
+  }
+
+  async zIncrBy(key: string, num: number, member: string) {
+    return await this.redisClient.zIncrBy(key, num, member);
   }
 
   async set(key: string, value: any, ttl?: number) {
