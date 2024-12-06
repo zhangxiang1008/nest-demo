@@ -6,6 +6,9 @@ const env = process.env.NODE_ENV;
 
 export default () => {
   return yaml.load(
-    fs.readFileSync(join(__dirname, `./${env || 'development'}.yml`), 'utf8'),
+    fs.readFileSync(
+      join(__dirname, '../../config', `./${env || 'development'}.yml`),
+      'utf8',
+    ),
   ) as Record<string, any>;
 };

@@ -11,6 +11,7 @@ import { BlogModule } from './blog/blog.module';
 import configuration from '../config/index';
 import { LoggerModule } from './logger/logger.module';
 import { RedisModule } from './redis/redis.module';
+import { SsrModule } from './ssr/ssr.module';
 
 @Module({
   imports: [
@@ -19,21 +20,22 @@ import { RedisModule } from './redis/redis.module';
       load: [configuration],
       isGlobal: true,
     }),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'zhangxiang1314',
-      database: 'myblog',
-      entities: [],
-      autoLoadEntities: true,
-      synchronize: true,
-    }),
-    AuthModule,
-    BlogModule,
+    // TypeOrmModule.forRoot({
+    //   type: 'mysql',
+    //   host: 'localhost',
+    //   port: 3306,
+    //   username: 'root',
+    //   password: 'zhangxiang1314',
+    //   database: 'myblog',
+    //   entities: [],
+    //   autoLoadEntities: true,
+    //   synchronize: true,
+    // }),
+    // AuthModule,
+    // BlogModule,
     LoggerModule,
-    RedisModule,
+    // RedisModule,
+    SsrModule,
   ],
   controllers: [AppController],
   providers: [

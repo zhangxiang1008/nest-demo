@@ -7,4 +7,4 @@ import SsrController from './ssr.controller';
   controllers: [SsrController],
   providers: [SsrService],
 })
-export class AuthModule {}
+export class SsrModule {}

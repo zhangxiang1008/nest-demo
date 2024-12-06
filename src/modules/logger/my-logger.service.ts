@@ -7,6 +7,7 @@ export class MyLogger extends ConsoleLogger {
   //   }
   error(message: any, stack?: string, context?: string) {
     // add your tailored logic here
-    super.error.apply(this, message);
+    // super.error.apply(this, message);
+    console.log(message);
   }
 }
